@@ -1,0 +1,61 @@
+@media (max-width: 800px){
+  html,body,#root{width:100%;min-width:0;overflow-x:hidden}
+  header{height:64px;width:100%;padding:0 14px;gap:10px}
+  header .brand{min-width:0;font-size:15px}
+  header .brandMark{width:28px;height:28px;flex:0 0 28px}
+  header .brandMark img{width:20px;height:20px}
+  nav{display:none!important}
+  .navActions{margin-left:auto;gap:8px}
+  .navActions .login{display:none!important}
+  .navActions .primary.small{display:inline-flex;height:30px;padding:0 10px;font-size:10px;white-space:nowrap}
+  .hero{width:100%;padding:72px 18px 58px}
+  h1{font-size:clamp(44px,13vw,68px);line-height:.94;letter-spacing:-.07em;overflow-wrap:anywhere}
+  .heroCopy{font-size:14px;line-height:1.65;max-width:560px}
+  .heroCtas{gap:9px;margin-top:28px}
+  .heroCtas a{width:100%;min-height:46px}
+  .heroMeta{gap:9px 16px;font-size:10px}
+  .terminalWrap{width:100%;padding:0 14px 76px}
+  .terminal{border-radius:14px}
+  .terminalTop{padding:0 12px;height:42px;font-size:9px}
+  .terminalGrid{grid-template-columns:1fr;min-width:0}
+  .commandPanel{padding:18px}
+  .commandText{font-size:17px;line-height:1.35}
+  .chart{height:125px}
+  .sidePanel{padding:18px;border-top:1px solid #20201e}
+  .section,.how,.affiliate,.pricing,.faq{width:100%;padding-left:18px;padding-right:18px}
+  .section{padding-bottom:80px}
+  .sectionIntro h2,.howCopy h2,.affiliate h2,.newsletter h2{font-size:clamp(34px,9vw,52px);line-height:1.02}
+  .sectionIntro h2 br,.howCopy h2 br,.affiliate h2 br{display:none}
+  .featureGrid{grid-template-columns:1fr;margin-top:38px}
+  .feature{padding:22px;min-height:0}
+  .feature .icon{margin-bottom:24px}
+  .how{grid-template-columns:1fr;gap:28px;padding-bottom:90px}
+  .howVisual{min-height:300px;border-radius:14px}
+  .radar{width:min(68vw,250px);height:min(68vw,250px)}
+  .priceGrid{grid-template-columns:1fr;gap:12px;margin-top:38px}
+  .priceGrid article{padding:22px}
+  .affiliate{grid-template-columns:1fr;gap:30px;padding-top:20px;padding-bottom:90px}
+  .affiliateFlow{gap:7px;line-height:1.4}
+  .affiliateFlow span,.affiliateFlow strong{padding:8px 9px}
+  .affiliateCard{padding:20px}
+  .inputRow{width:100%}
+  .inputRow input{width:0;font-size:12px}
+  .faq{padding-bottom:90px}
+  .faqItem button{font-size:13px;gap:12px}
+  .newsletter{width:auto;margin:0 14px 60px;padding:24px;border-radius:14px}
+  .newsletter form{width:100%;display:flex;min-width:0}
+  .newsletter input{min-width:0;width:0}
+  .newsletter form .primary{flex:0 0 auto;padding:0 13px}
+  footer{width:100%;padding:24px 18px 38px}
+}
+@media (max-width: 430px){
+  header .navActions .primary.small{font-size:0;padding:0;width:30px;justify-content:center}
+  header .navActions .primary.small::before{content:'↗';font-size:15px}
+  .eyebrow{font-size:8px;max-width:100%;white-space:nowrap}
+  .hero{padding-top:60px}
+  .heroMeta{display:grid;grid-template-columns:1fr 1fr;text-align:left}
+  .heroMeta span:last-child{grid-column:1/-1;text-align:center}
+  .terminalTop span:not(.live){max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .newsletter form{display:grid;grid-template-columns:1fr;gap:8px}
+  .newsletter input,.newsletter form .primary{width:100%;min-height:46px;border-radius:9px}
+}
