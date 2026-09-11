@@ -1,6 +1,7 @@
 (()=>{
   const APP='https://kitsetups.xyz';
   const apply=()=>{
+    document.querySelectorAll('body *').forEach(el=>{if(el.children.length===0&&el.textContent.includes('KitSetuop'))el.textContent=el.textContent.replaceAll('KitSetuop','KitSetups')});
     document.querySelectorAll('header .brandMark, footer .brandMark').forEach(el=>{
       if(el.dataset.logoApplied)return;
       el.dataset.logoApplied='1';
@@ -13,6 +14,7 @@
       if(t.includes('join the affiliate programme'))a.href=APP+'/?auth=signup';
       if(t==='get started')a.href=APP+'/?auth=signup';
       if(t.includes('go premium'))a.href=APP+'/?auth=signup';
+      if(t.includes('start using kitsetups'))a.href=APP+'/?auth=signup';
     });
   };
   apply();
