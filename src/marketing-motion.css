@@ -20,3 +20,10 @@ header:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
 @media(max-width:760px){header{position:sticky!important;top:0!important;padding-left:16px!important;padding-right:16px!important}.heroBackdrop{inset:0 1%;opacity:.64!important;background-position:57% 44%;filter:saturate(1.14) contrast(1.18) brightness(.84)!important}.heroCtas .heroPrimary,.heroCtas .heroSecondary{height:42px;padding:0 13px;font-size:10px}.heroCtas .heroPrimary{min-width:148px}.heroCtas .heroSecondary{min-width:138px}.heroMeta{max-width:100%;padding:8px 0}.heroMetaTrack{gap:24px;animation-duration:18s}}
 @media(prefers-reduced-motion:reduce){.heroBackdrop,.heroLine,.heroCopy,.heroCtas,.heroMetaTrack,.reveal,.scrollSlide{animation:none!important}.reveal,.scrollSlide{opacity:1!important;transform:none!important}}
 /* final motion pass: intentionally no continuous card motion */
+
+/* Mobile sticky fix: remove any transformed/overflowing containing context from the header. */
+@media(max-width:760px){
+  .app{padding-top:70px!important}
+  header{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:70px!important;margin:0!important;max-width:none!important;z-index:9999!important;transform:none!important;will-change:auto!important}
+  header .navActions{flex-shrink:0}
+}
