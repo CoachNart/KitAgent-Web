@@ -1,62 +1,63 @@
-@keyframes floatSoft{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-10px,0)}}
-@keyframes driftLeft{from{opacity:0;transform:translate3d(-42px,16px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes driftRight{from{opacity:0;transform:translate3d(42px,16px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes riseScale{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes softBlurIn{from{opacity:0;filter:blur(10px);transform:scale(.985)}to{opacity:1;filter:blur(0);transform:scale(1)}}
-@keyframes lineSweep{0%{transform:translateX(-110%);opacity:0}25%{opacity:1}100%{transform:translateX(110%);opacity:0}}
-@keyframes iconFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(2deg)}}
-@keyframes pricePulse{0%,100%{box-shadow:0 0 0 rgba(0,199,254,0)}50%{box-shadow:0 18px 70px rgba(0,199,254,.1)}}
-@keyframes heroImage{0%{transform:scale(1.02) translate3d(0,0,0)}100%{transform:scale(1.08) translate3d(-8px,-4px,0)}}
-@keyframes chartPulse{from{opacity:.45;filter:drop-shadow(0 0 2px rgba(0,199,254,.15))}to{opacity:1;filter:drop-shadow(0 0 9px rgba(0,199,254,.4))}}
+/* Scroll-only motion layer: content slides in once, then stays stable. */
+@keyframes scrollLeft{from{opacity:0;transform:translate3d(-46px,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes scrollRight{from{opacity:0;transform:translate3d(46px,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes heroFlip{from{opacity:0;transform:rotateX(-78deg) translateY(18px)}to{opacity:1;transform:rotateX(0) translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroImage{0%{transform:scale(1.02) translate3d(0,0,0)}100%{transform:scale(1.07) translate3d(-7px,-3px,0)}}
+@keyframes metaMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes sweep{to{transform:rotate(360deg)}}
+@keyframes dotPulse{50%{transform:scale(1.7);opacity:.55}}
 
-/* Sticky glass header */
-header{position:sticky!important;top:0!important;z-index:100!important;width:100%;background:rgba(4,7,9,.82);backdrop-filter:blur(18px) saturate(1.15);-webkit-backdrop-filter:blur(18px) saturate(1.15);box-shadow:0 1px 0 rgba(255,255,255,.05),0 12px 40px rgba(0,0,0,.16)}
-header:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,199,254,.35),transparent);pointer-events:none}
+/* Full-width sticky glass header. */
+header{position:sticky!important;top:0!important;z-index:100!important;width:100%!important;max-width:none!important;margin:0!important;background:rgba(5,10,13,.64)!important;border-bottom:1px solid rgba(255,255,255,.08)!important;backdrop-filter:blur(20px) saturate(1.35)!important;-webkit-backdrop-filter:blur(20px) saturate(1.35)!important;box-shadow:0 12px 42px rgba(0,0,0,.22)!important}
+header:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,199,254,.42),transparent);pointer-events:none}
 
-/* Hero visual */
-.heroBackdrop{opacity:.58!important;filter:saturate(1.18) contrast(1.22) brightness(.9)!important;background-position:center 44%;animation:heroImage 16s ease-in-out infinite alternate}
-.heroBackdrop:after{background:linear-gradient(180deg,rgba(4,6,7,.02),rgba(4,6,7,.1) 48%,rgba(4,6,7,.55)),radial-gradient(circle at 50% 43%,transparent 0,rgba(4,6,7,.04) 50%,#040607 100%)}
-.hero .orbA{animation:floatSoft 7s ease-in-out infinite}.hero .orbB{animation:floatSoft 9s ease-in-out -2s infinite reverse}
+/* Sharper but controlled hero image. */
+.heroBackdrop{opacity:.58!important;filter:saturate(1.16) contrast(1.2) brightness(.9)!important;background-position:center 44%;animation:heroImage 16s ease-in-out infinite alternate}
+.heroBackdrop:after{background:linear-gradient(180deg,rgba(4,6,7,.02),rgba(4,6,7,.12) 48%,rgba(4,6,7,.56)),radial-gradient(circle at 50% 43%,transparent 0,rgba(4,6,7,.03) 50%,#040607 100%)}
 
-/* Compact modern hero CTAs */
+/* Hero buttons: compact, deliberate, no oversized pill treatment. */
 .heroCtas{gap:10px}
-.heroCtas .heroPrimary,.heroCtas .heroSecondary{height:44px;padding:0 15px;border-radius:10px;font-size:11px;letter-spacing:-.01em;position:relative;overflow:hidden;white-space:nowrap}
-.heroCtas .heroPrimary{min-width:158px;box-shadow:0 8px 28px rgba(0,199,254,.14)}
-.heroCtas .heroSecondary{min-width:145px;background:rgba(8,14,17,.76)}
-.heroCtas .heroPrimary:before,.heroCtas .heroSecondary:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.16) 48%,transparent 70%);transform:translateX(-120%);animation:lineSweep 4.8s ease-in-out infinite;pointer-events:none}
-.heroCtas .heroPrimary svg,.heroCtas .heroSecondary .buttonArrow{transition:transform .25s ease}.heroCtas .heroPrimary:hover svg{transform:translate(3px,-3px)}.heroCtas .heroSecondary:hover .buttonArrow{transform:translateY(3px)}
+.heroCtas .heroPrimary,.heroCtas .heroSecondary{height:44px;padding:0 16px;border-radius:10px;font-size:11px;letter-spacing:-.01em;position:relative;overflow:hidden;white-space:nowrap}
+.heroCtas .heroPrimary{min-width:164px;box-shadow:0 8px 28px rgba(0,199,254,.14)}
+.heroCtas .heroSecondary{min-width:150px;background:rgba(8,14,17,.78)}
+.heroCtas .heroPrimary:after{content:"";position:absolute;right:11px;top:50%;width:5px;height:5px;border-radius:50%;background:rgba(3,16,21,.45);transform:translateY(-50%)}
+.heroCtas .heroPrimary svg,.heroCtas .heroSecondary svg{transition:transform .25s ease}.heroCtas .heroPrimary:hover svg{transform:translate(3px,-3px)}.heroCtas .heroSecondary:hover svg{transform:translate(3px,-3px)}
 
-/* Hero entrance */
-.heroLine{animation:riseScale .8s cubic-bezier(.2,.8,.2,1) both}.heroLine:nth-child(2){animation-delay:.18s}.heroCopy{animation:riseScale .7s .35s both}.heroCtas{animation:riseScale .7s .48s both}.heroMeta{animation:riseScale .7s .62s both}
+/* Hero entrance stays as the only load-time flourish. */
+.heroLine{animation:heroFlip .85s cubic-bezier(.2,.75,.2,1) both}.heroLine:nth-child(2){animation-delay:.18s}.heroCopy{animation:fadeUp .7s .35s both}.heroCtas{animation:fadeUp .7s .48s both}
 
-/* Feature section */
-#features .sectionIntro{animation:driftLeft .9s both}
-#features .featureGrid{position:relative}
-#features .featureGrid:after{content:"";position:absolute;left:-10%;right:-10%;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:lineSweep 5.5s ease-in-out infinite;pointer-events:none}
-#features .feature:nth-child(1){animation:riseScale .8s .05s both}#features .feature:nth-child(2){animation:driftRight .8s .15s both}#features .feature:nth-child(3){animation:driftLeft .8s .25s both}#features .feature:nth-child(4){animation:riseScale .8s .2s both}#features .feature:nth-child(5){animation:driftRight .8s .3s both}#features .feature:nth-child(6){animation:driftLeft .8s .4s both}
-#features .feature{transition:transform .4s ease,background .3s ease,box-shadow .3s ease}#features .feature:hover{transform:translateY(-8px) scale(1.012);box-shadow:0 18px 40px rgba(0,199,254,.08);position:relative;z-index:2}
-#features .feature .icon{animation:iconFloat 4.5s ease-in-out infinite}#features .feature:nth-child(2) .icon{animation-delay:.7s}#features .feature:nth-child(3) .icon{animation-delay:1.2s}#features .feature:nth-child(4) .icon{animation-delay:.35s}#features .feature:nth-child(5) .icon{animation-delay:1.5s}#features .feature:nth-child(6) .icon{animation-delay:2s}
+/* The capability row moves right-to-left inside its own viewport. */
+.heroMeta{display:block!important;max-width:760px;margin:0 auto!important;overflow:hidden!important;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);border-top:1px solid rgba(255,255,255,.055);border-bottom:1px solid rgba(255,255,255,.055);padding:9px 0}
+.heroMetaTrack{display:flex;width:max-content;align-items:center;gap:30px;animation:metaMarquee 20s linear infinite}
+.heroMetaTrack span{font-size:10px;font-weight:700;letter-spacing:.02em;display:inline-flex;align-items:center;gap:7px}
+.heroMetaTrack span:before{content:"";width:5px;height:5px;border-radius:50%;display:inline-block;box-shadow:0 0 10px currentColor}
+.metaBlue{color:#63d9ff}.metaCyan{color:#00c7fe}.metaViolet{color:#a98cff}.metaGreen{color:#64e6a3}.metaAmber{color:#ffc76b}.metaPink{color:#ff8fb8}
 
-/* Terminal */
-.terminal{animation:softBlurIn 1s .1s both}.terminalTop{animation:floatSoft 4s ease-in-out infinite alternate}.result{animation:floatSoft 6s ease-in-out 1s infinite}.sidePanel{animation:driftRight 1s .35s both}.alertCard{animation:floatSoft 4s ease-in-out 1.8s infinite}.chart .line{animation:chartPulse 3.2s ease-in-out infinite alternate}
+/* Nothing inside cards animates. Only the card itself slides into view. */
+.reveal,.scrollSlide{opacity:0;transform:translate3d(0,22px,0)}
+.reveal.is-visible{animation:fadeUp .72s cubic-bezier(.2,.75,.2,1) forwards}
+.scrollSlide.is-visible{animation-duration:.72s;animation-timing-function:cubic-bezier(.2,.75,.2,1);animation-fill-mode:forwards}
+.scrollSlide.fromLeft.is-visible{animation-name:scrollLeft}.scrollSlide.fromRight.is-visible{animation-name:scrollRight}
+.feature,.feature:hover{transition:none!important;transform:none!important;background:#080c0e!important;box-shadow:none!important}
+.feature .icon,.feature h3,.feature p,.feature>span{animation:none!important;transition:none!important}
+.terminal,.terminalTop,.result,.sidePanel,.alertCard,.chart .line,.howVisual,.howCopy,.radar,.affiliateCard,.cardTop svg,.priceGrid article,.faqItem,.newsletter,footer{animation:none}
 
-/* How it works */
-#how .howVisual{animation:driftLeft 1s both}#how .howCopy{animation:driftRight 1s .15s both}#how .radar{animation:floatSoft 6s ease-in-out infinite}
-#how .step{transition:transform .3s ease,padding-left .3s ease,border-color .3s ease}#how .step:hover{transform:translateX(8px);padding-left:8px;border-color:#24515e}
-#how .step:nth-of-type(1){animation:driftRight .7s .15s both}#how .step:nth-of-type(2){animation:driftRight .7s .3s both}#how .step:nth-of-type(3){animation:driftRight .7s .45s both}#how .step:nth-of-type(4){animation:driftRight .7s .6s both}
+/* Keep the radar as a static visual; it should not compete with the scroll motion. */
+#how .sweep{animation:none!important;transform:rotate(24deg)}
+#how .radarDot{animation:none!important;transform:none;opacity:1}
 
-/* Pricing */
-#pricing .sectionIntro{animation:softBlurIn .9s both}#pricing .priceGrid article:first-child{animation:driftLeft .9s .12s both}#pricing .priceGrid .premium{animation:driftRight .9s .22s both,pricePulse 4.5s 1.2s ease-in-out infinite}#pricing .priceGrid article{transition:transform .4s ease,box-shadow .4s ease}#pricing .priceGrid article:hover{transform:translateY(-8px) scale(1.012);box-shadow:0 18px 45px rgba(0,199,254,.07)}
+/* No hover movement on the landing-page content. */
+#features .feature:hover,#how .step:hover,#pricing .priceGrid article:hover,.faqItem:hover,#affiliate .affiliateFlow span:hover,#affiliate .affiliateFlow strong:hover{transform:none!important;box-shadow:none!important;padding-left:initial}
 
-/* Affiliate */
-#affiliate>div:first-child{animation:driftLeft .95s both}#affiliate .affiliateCard{animation:riseScale .95s .2s both}#affiliate .affiliateFlow span,#affiliate .affiliateFlow strong{transition:transform .25s ease,border-color .25s ease}#affiliate .affiliateFlow span:hover,#affiliate .affiliateFlow strong:hover{transform:translateY(-4px);border-color:var(--accent)}#affiliate .affiliateCard .cardTop svg{animation:floatSoft 3.8s ease-in-out infinite}
-
-/* FAQ + newsletter + footer */
-.faq .sectionIntro{animation:softBlurIn .9s both}.faqItem{transition:transform .25s ease,border-color .25s ease}.faqItem:hover{transform:translateX(5px);border-color:#2d5865}.faqItem button svg{transition:transform .35s ease,color .2s ease}.faqItem:hover button svg{color:var(--accent)}
-.newsletter{position:relative;overflow:hidden;animation:riseScale 1s both}.newsletter:before{content:"";position:absolute;width:280px;height:280px;right:-100px;top:-150px;border:1px solid rgba(0,199,254,.14);border-radius:50%;animation:floatSoft 8s ease-in-out infinite}.newsletter:after{content:"";position:absolute;left:-30%;bottom:0;width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:lineSweep 6s ease-in-out infinite}.newsletter form{position:relative;z-index:1;animation:driftRight .9s .25s both}
-footer{animation:softBlurIn 1s both}footer .brand{transition:transform .3s ease}footer .brand:hover{transform:translateX(5px)}
-
-/* Keep content visible; motion is enhancement, never a visibility dependency */
-.reveal{animation-fill-mode:both}
-@media(max-width:760px){.heroBackdrop{inset:0 1%;opacity:.64!important;background-position:57% 44%;filter:saturate(1.15) contrast(1.18) brightness(.84)!important}.heroCtas .heroPrimary,.heroCtas .heroSecondary{height:42px;padding:0 13px;font-size:10px}.heroCtas .heroPrimary{min-width:148px}.heroCtas .heroSecondary{min-width:136px}header{position:sticky!important;top:0!important}}
-@media(prefers-reduced-motion:reduce){.heroBackdrop,.hero .orbA,.hero .orbB,.terminalTop,.result,.alertCard,#how .radar,#affiliate .affiliateCard .cardTop svg,.newsletter:before,.newsletter:after,#features .feature .icon,.heroCtas .heroPrimary:before,.heroCtas .heroSecondary:before,.chart .line{animation:none!important}.heroLine,.heroCopy,.heroCtas,.heroMeta,#features .sectionIntro,#features .feature,.terminal,.sidePanel,#how .howVisual,#how .howCopy,#pricing .sectionIntro,#pricing .priceGrid article,#affiliate>div:first-child,#affiliate .affiliateCard,.faq .sectionIntro,.newsletter,footer,.newsletter form{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}}
+@media(max-width:760px){
+  header{position:sticky!important;top:0!important;padding-left:16px!important;padding-right:16px!important}
+  .heroBackdrop{inset:0 1%;opacity:.64!important;background-position:57% 44%;filter:saturate(1.14) contrast(1.18) brightness(.84)!important}
+  .heroCtas .heroPrimary,.heroCtas .heroSecondary{height:42px;padding:0 13px;font-size:10px}
+  .heroCtas .heroPrimary{min-width:148px}.heroCtas .heroSecondary{min-width:138px}
+  .heroMeta{max-width:100%;padding:8px 0}.heroMetaTrack{gap:24px;animation-duration:18s}
+}
+@media(prefers-reduced-motion:reduce){
+  .heroBackdrop,.heroLine,.heroCopy,.heroCtas,.heroMetaTrack,.reveal,.scrollSlide{animation:none!important}
+  .reveal,.scrollSlide{opacity:1!important;transform:none!important}
+}
