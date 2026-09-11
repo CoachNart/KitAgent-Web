@@ -11,7 +11,7 @@
     document.querySelectorAll('header .navActions .login').forEach(a=>{a.href=APP+'/?auth=signin';a.textContent='Sign in';});
     document.querySelectorAll('a').forEach(a=>{
       const t=(a.textContent||'').trim().toLowerCase();
-      if(t.includes('join the affiliate programme'))a.href=APP+'/?auth=signup';
+      if(t.includes('join the affiliate programme')){a.href=APP+'/?auth=signup&affiliate=1';a.textContent='Register as affiliate';}
       if(t==='get started')a.href=APP+'/?auth=signup';
       if(t.includes('go premium'))a.href=APP+'/?auth=signup';
       if(t.includes('start using kitsetups'))a.href=APP+'/?auth=signup';
