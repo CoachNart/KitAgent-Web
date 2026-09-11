@@ -10,8 +10,8 @@
 @keyframes pricePulse{0%,100%{box-shadow:0 0 0 rgba(0,199,254,0)}50%{box-shadow:0 18px 70px rgba(0,199,254,.08)}}
 @keyframes tickerDrift{from{transform:translateX(0)}to{transform:translateX(-5px)}}
 
-/* Sharper, more visible hero visual without overpowering the headline */
-.heroBackdrop{opacity:.43;filter:saturate(1.12) contrast(1.18) brightness(.82);background-image:linear-gradient(180deg,rgba(4,6,7,.24),rgba(4,6,7,.58)),url('https://www.bso.co/hs-fs/hubfs/AI-Generated%20Media/Images/A%20traders%20desk%20in%20a%20futuristic%20setting%20multiple%20transparent%20holographic%20screens%20streaming%20realtime%20crypto%20data%20feeds%20from%20multiple%20exchanges-1.png?height=900&name=A+traders+desk+in+a+futuristic+setting+multiple+transparent+holographic+screens+streaming+realtime+crypto+data+feeds+from+multiple+exchanges-1.png&width=1600);background-position:center 44%;animation:heroImage 16s ease-in-out infinite alternate}
+/* Sharper, more visible hero visual; keeps the existing image source intact */
+.heroBackdrop{opacity:.43;filter:saturate(1.12) contrast(1.18) brightness(.82);background-position:center 44%;animation:heroImage 16s ease-in-out infinite alternate}
 .heroBackdrop:after{background:linear-gradient(180deg,rgba(4,6,7,.05),rgba(4,6,7,.18) 48%,rgba(4,6,7,.72)),radial-gradient(circle at 50% 43%,transparent 0,rgba(4,6,7,.08) 50%,#040607 100%)}
 .hero .orbA{animation:floatSoft 7s ease-in-out infinite}
 .hero .orbB{animation:floatSoft 9s ease-in-out -2s infinite reverse}
@@ -73,7 +73,6 @@ footer{animation:softBlurIn 1s both}
 footer .brand{transition:transform .3s ease}
 footer .brand:hover{transform:translateX(5px)}
 
-/* Scroll-triggered section choreography where supported */
 @supports(animation-timeline:view()){.reveal{animation-timeline:view(block 8% 0%);animation-range:entry 0% cover 34%}.reveal#features .sectionIntro,.reveal#how .howVisual,.reveal#how .howCopy,.reveal#pricing .sectionIntro,.reveal#affiliate>div:first-child,.reveal .sectionIntro{animation-timeline:view(block 8% 0%);animation-range:entry 0% cover 30%}}
 
 @media(max-width:760px){
