@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client';
 import {ArrowUpRight,ChevronDown,Command,LineChart,Bell,Brain,ShieldCheck,Users,WalletCards,Zap} from 'lucide-react';
 import './styles.css';
 import './marketing-motion.css';
+import './privacy.css';
 import PrivacyPolicy from './PrivacyPolicy';
 
 const APP_URL='https://kitsetups.xyz';
