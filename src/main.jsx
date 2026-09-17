@@ -1,7 +1,8 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {ArrowUpRight,ChevronDown,Command,LineChart,Bell,Brain,ShieldCheck,Users,WalletCards,Zap,Activity,Search,Check} from 'lucide-react';
+import {ArrowUpRight,ChevronDown,Command,LineChart,Bell,Brain,ShieldCheck,Users,WalletCards,Zap,Activity,Search,Check,Mic,Volume2,Pause,Play,X} from 'lucide-react';
 import './styles.css';
+import './voice-tour.css';
 import './privacy.css';
 import PrivacyPolicy from './PrivacyPolicy';
 
@@ -23,12 +24,38 @@ const features=[
  {icon:Zap,title:'Move with less friction',text:'Shorten the distance between a market idea and an informed decision.'}
 ];
 const steps=[['01','Connect','Bring your trading environment into one place.'],['02','Ask','Ask what changed, what matters and what needs attention.'],['03','Review','Read the context, setup and risk before acting.'],['04','Act','Execute when ready, or keep the market under watch.']];
+const tourSteps=[
+ {target:'#top',title:'Welcome to KitSetups',text:'Welcome to KitSetups. This quick voice tour will show you how the platform works, where everything lives, and how to move from market context to a defined trading decision. You can pause, skip, or replay the tour anytime.',position:'bottom'},
+ {target:'.heroVisual',title:'Your market command center',text:'This is the core idea behind KitSetups: bring market information, analysis, alerts and trading workflows into one focused workspace. Use the Open KitSetups button when you are ready to enter the actual platform.',position:'left'},
+ {target:'#product',title:'The product',text:'Here you get the main product view. Market View helps you understand price and structure. The focused workspace keeps your research clean. The decision layer brings the important context together before you act.',position:'top'},
+ {target:'.featureList',title:'Your core tools',text:'These are the capabilities you will use most: market intelligence, change detection, alerts, connected workflows, risk controls and faster decision making. Think of them as layers around your trading process.',position:'top'},
+ {target:'#workflow',title:'How to use KitSetups',text:'The workflow is simple. Connect your environment, ask what is happening, review the market context and setup, then act only when you are ready. KitSetups is designed to reduce the jumping between tools.',position:'top'},
+ {target:'.pricingNew',title:'Choose your plan',text:'Start with the free workspace to learn the product. Premium unlocks deeper market workflows, expanded intelligence, premium monitoring and advanced trading tools.',position:'top'},
+ {target:'#affiliate',title:'Earn with referrals',text:'If you have a trading community, the affiliate area gives you a referral flow. Register, share your referral link, and qualifying Premium payments can generate recurring commission.',position:'top'},
+ {target:'.faqNew',title:'Get answers',text:'The FAQ explains the important product details, including what KitSetups is, how connected trading workflows work, and how the affiliate programme operates.',position:'top'},
+ {target:'.newsletterNew',title:'Stay close',text:'Subscribe here for product updates. When you are finished, use Open KitSetups to enter the live product and start exploring.',position:'top'}
+];
 function appLink(ref=''){return `${APP_URL}${ref?`/?ref=${encodeURIComponent(ref)}`:''}`}
+function VoiceTour(){
+ const [active,setActive]=useState(false);const [step,setStep]=useState(0);const [speaking,setSpeaking]=useState(false);const [blocked,setBlocked]=useState(false);const speechRef=useRef(null);
+ const current=tourSteps[step];
+ const speak=(text)=>{if(!('speechSynthesis' in window)){setBlocked(true);return} window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=.94;u.pitch=1;u.volume=1;u.lang='en-US';u.onstart=()=>setSpeaking(true);u.onend=()=>setSpeaking(false);u.onerror=()=>{setSpeaking(false);setBlocked(true)};speechRef.current=u;window.speechSynthesis.speak(u)};
+ const start=(manual=false)=>{setActive(true);setBlocked(false);try{localStorage.setItem('kitsetups_voice_tour_seen','1')}catch{};setTimeout(()=>speak(tourSteps[0].text),manual?80:250)};
+ const stopSpeech=()=>{if('speechSynthesis' in window)window.speechSynthesis.cancel();setSpeaking(false)};
+ const finish=()=>{stopSpeech();setActive(false);setStep(0);try{localStorage.setItem('kitsetups_voice_tour_seen','1')}catch{}};
+ const go=(next)=>{stopSpeech();if(next>=tourSteps.length){finish();return}setStep(next);setTimeout(()=>{const el=document.querySelector(tourSteps[next].target);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>speak(tourSteps[next].text),500)},100)};
+ useEffect(()=>{try{if(!localStorage.getItem('kitsetups_voice_tour_seen')){const t=setTimeout(()=>start(false),900);return()=>clearTimeout(t)}}catch{}},[]);
+ useEffect(()=>{if(!active)return;const el=document.querySelector(current.target);if(!el)return;el.classList.add('tourSpotlight');el.setAttribute('data-tour-title',current.title);return()=>{el.classList.remove('tourSpotlight');el.removeAttribute('data-tour-title')}},[active,step,current.target,current.title]);
+ useEffect(()=>()=>stopSpeech(),[]);
+ if(!active)return <button className="tourLauncher" onClick={()=>start(true)} aria-label="Start KitSetups voice tour"><Mic size={15}/> Product tour</button>;
+ return <div className="voiceTour" role="dialog" aria-label="KitSetups guided tour"><div className="tourBar"><div className="tourBrand"><span className="tourMic"><Volume2 size={15}/></span><div><strong>KitSetups Tour</strong><small>Voice guide · {step+1}/{tourSteps.length}</small></div></div><div className="tourProgress"><span style={{width:`${((step+1)/tourSteps.length)*100}%`}}/></div><div className="tourActions"><button onClick={speaking?stopSpeech:()=>speak(current.text)} aria-label={speaking?'Pause voice':'Play voice'}>{speaking?<Pause size={15}/>:<Play size={15}/>}</button><button onClick={finish} aria-label="Close tour"><X size={16}/></button></div></div><div className="tourPanel"><div><span className="tourKicker">NOW SHOWING</span><h3>{current.title}</h3><p>{current.text}</p>{blocked&&<small className="tourBlocked">Voice playback was blocked by the browser. Tap the play button above to start it.</small>}</div><div className="tourNav"><button className="tourSkip" onClick={finish}>Skip tour</button><div><button className="tourBack" onClick={()=>go(step-1)} disabled={step===0}>Back</button><button className="tourNext" onClick={()=>go(step+1)}>{step===tourSteps.length-1?'Finish':'Next'} <ArrowUpRight size={14}/></button></div></div></div></div>;
+}
 function App(){const [open,setOpen]=useState(null);const [email,setEmail]=useState('');const [sent,setSent]=useState(false);const [ref,setRef]=useState('');const [copied,setCopied]=useState(false);
 useEffect(()=>{try{const incoming=new URLSearchParams(window.location.search).get('ref')?.trim().toUpperCase().replace(/[^A-Z0-9_-]/g,'').slice(0,24);const saved=localStorage.getItem('kitsetups_referral_code')||localStorage.getItem('kitsetuop_referral_code')||localStorage.getItem('kitagent_referral_code')||'';if(incoming)localStorage.setItem('kitsetups_referral_code',incoming);setRef(incoming||saved)}catch{}},[]);
 const referralLink=ref?appLink(ref):APP_URL;
 const copyReferral=async()=>{if(!ref)return;try{await navigator.clipboard?.writeText(referralLink);setCopied(true);setTimeout(()=>setCopied(false),1600)}catch{}};
 return <div className="site">
+<VoiceTour/>
 <header className="header"><a className="brand" href="#top"><span className="brandMark"><Command size={17}/></span><span>{BRAND}</span></a><nav><a href="#product">Product</a><a href="#workflow">How it works</a><a href="#pricing">Pricing</a></nav><div className="headerActions"><a className="headerX" href={X_URL} target="_blank" rel="noreferrer">X</a><a className="headerLogin" href={referralLink}>Open app</a><a className="button buttonSmall" href={referralLink}>Launch <ArrowUpRight size={14}/></a></div></header>
 <main id="top">
 <section className="heroNew">
