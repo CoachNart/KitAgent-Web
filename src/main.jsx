@@ -7,7 +7,7 @@ const APP_URL='https://kitsetups.xyz',X_URL='https://x.com/kitsetups';
 const IMAGES={
 hero:'https://images.unsplash.com/photo-1768055105681-7d2096c5165f?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=2200',
 desk:'https://images.unsplash.com/photo-1748439435495-722cc1728b7e?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1800',
-chart:'https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1600'
+chart:'https://images.unsplash.com/photo-1560221328-12fe60f83ab8?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1600'
 };
 const Mark=()=> <span className="mark"><Command size={15}/></span>;
 
